@@ -1,0 +1,339 @@
+<div class="wrapper w-100">
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper" [ngClass]="{out: sidebar}">
+          <div class="sidebar-heading">Report</div>
+          <div class="list-group list-group-flush">
+            <a href="#" class="list-group-item list-group-item-action bg-light">Sale Report</a>
+          </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+    
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+    
+          <nav class="navbar navbar-light bg-light border-bottom justify-between  flex">
+            <button class=" sidebarbutton ba br3 bg-white mb2" id="menu-toggle" (click)="sideBar()"><img class="ba bn br3" src="./../../../assets/img/hamburger.png" alt=""></button>
+            <button class="btn btn-primary justify-end " (click)="getApi()">Lấy dữ liệu</button>
+          </nav>
+    
+          <div class="filters w-100-ns bb b--gray flex" style="height:10rem">
+            <div class="filter_block h-100">
+                <div class="filter h-50 w-100">
+                    <section class="justify-between flex bb w-100">
+                        <label for="" class="f5 gray tc content-center ml2 mt1 ">Năm</label>
+                          <div class="flex w-50 justify-between">
+                              <button class="w-40 bn bg-white"><img src="./../../../assets/img/images.png" alt=""></button>
+                              <button class="w-40 bn bg-white "><img src="./../../../assets/img/tải xuống.jpg" alt=""></button>
+                          </div>
+                    </section>
+                      <body class="dlk-radio flex w-100 justify-around  overflow-y-scroll"  >
+                          <label class="btn btn-success " *ngFor="let item of years">
+                              <input name="choices[1]" class="form-control" type="radio" value={{item}} (change)="handleYear($event)" [(ngModel)]="year">
+                              <i class="fa">{{item}}</i>
+                         </label>
+                          
+                      </body> 
+                </div>
+                <div class="filter h-50 w-100">
+                    <section class="justify-between flex bb w-100">
+                        <label for="" class="f5 gray tc content-center ml2 mt1 ">Tên CN</label>
+                          <div class="flex w-50 justify-between  ">
+                              <button class="w-40 bn bg-white"><img src="./../../../assets/img/images.png" alt=""></button>
+                              <button class="w-40 bn bg-white "><img src="./../../../assets/img/tải xuống.jpg" alt=""></button>
+                          </div>
+                    </section>
+                      <body class="flex w-100 justify-between overflow-y-scroll dlk-radio " >
+                        <label class="btn btn-success ml2">
+                          <input name="choices[2][]" class="form-control" type="checkbox" (change)="handleCN($event)" value="HN" >
+                          <i class="fa ">Hà Nội</i>
+                        </label>
+                       
+                      </body> 
+                </div>
+            </div>
+            <div class="filter_block">
+                <div class="filter h-100 w-100" >
+                    <section class="justify-between flex bb w-100 h-20">
+                        <label for="" class="f5 gray tc content-center ml2 mt1 ">Tháng</label>
+                          <div class="flex w-50 justify-between  ">
+                              <button class="w-40 bn bg-white" (click)="checkAllMonth()"><img src="./../../../assets/img/images.png" alt=""></button>
+                              <button class="w-40 bn bg-white "><img src="./../../../assets/img/tải xuống.jpg" alt=""></button>
+                          </div>
+                    </section>
+                      <body class="  dlk-radio flex w-100 justify-between overflow-y-scroll" style="height: 7rem;"  >
+                        <label class="btn btn-success w-40 ml1 mr1" *ngFor="let item of months">
+                          <input name="choices[3][]" class="form-control" type="checkbox" (change)="handleMonth($event)" value={{item}} [checked]="checkedAllMonth">
+                          <i class="fa ">{{item}}</i>
+                        </label>
+                      </body> 
+                </div>
+            </div>
+            <div class="filter_block">
+                <div class="filter h-100 w-100" >
+                    <section class="justify-between flex bb w-100 h-20">
+                        <label for="" class="f5 gray tc content-center ml1 mt1 ">Hệ thống</label>
+                          <div class="flex w-50 justify-between  ">
+                              <button class="w-40 bn bg-white" (click)="checkAllSystem()"><img src="./../../../assets/img/images.png" alt=""></button>
+                              <button class="w-40 bn bg-white "><img src="./../../../assets/img/tải xuống.jpg" alt=""></button>
+                          </div>
+                    </section>
+                      <body class="  dlk-radio flex w-100 justify-between overflow-y-scroll" style="height: 7rem;"  >
+                        <label class="btn btn-success w-80 ml1" *ngFor="let item of systems">
+                          <input name="choices[3][]" class="form-control" type="checkbox" (change)="handleSystem($event)" value={{item}} [checked]="checkedAllSystem">
+                          <i class="fa ">{{item}}</i>
+                        </label>
+                      </body> 
+                </div>
+            </div>
+            <div class="filter_block">
+                <div class="filter h-100 w-100" >
+                    <section class="justify-between flex bb w-100 h-20">
+                        <label for="" class="f5 gray tc content-center ml1 mt1 " >Cửa hàng</label>
+                          <div class="flex w-50 justify-between  ">
+                              <button class="w-40 bn bg-white" (click)="checkAllShop()"><img src="./../../../assets/img/images.png" alt=""></button>
+                              <button class="w-40 bn bg-white "><img src="./../../../assets/img/tải xuống.jpg" alt=""></button>
+                          </div>
+                    </section>
+                      <body class="  dlk-radio flex w-100 justify-between overflow-y-scroll" style="height: 7rem;"  >
+                        <label class="btn btn-success w-80 ml1" *ngFor="let item of shop">
+                          <input name="choices[3][]" class="form-control" type="checkbox" (change)="handleShop($event)" value={{item}} [checked]="checkedAllShop">
+                          <i class="fa ">{{item}}</i>
+                        </label>
+                      </body> 
+                </div>
+            </div>
+            <div class="filter_block">
+                <div class="filter h-100 w-100" >
+                    <section class="justify-between flex bb w-100 h-20">
+                        <label for="" class="f5 gray tc content-center ml2 mt1 ">Kênh</label>
+                          <div class="flex w-50 justify-between  ">
+                              <button class="w-40 bn bg-white"(click)="checkAllChanel()"><img src="./../../../assets/img/images.png" alt=""></button>
+                              <button class="w-40 bn bg-white "><img src="./../../../assets/img/tải xuống.jpg" alt=""></button>
+                          </div>
+                    </section>
+                      <body class="  dlk-radio flex w-100 justify-between overflow-y-scroll" style="height: 7rem;"  >
+                        <label class="btn btn-success w-80 ml2" *ngFor="let item of kind">
+                          <input name="choices[3][]" class="form-control" type="checkbox" (change)="handleKind($event)" value={{item}} [checked]="checkedAllChanel">
+                          <i class="fa ">{{item}}</i>
+                        </label>
+                      </body> 
+                </div>
+            </div>
+            <div class="filter_block">
+                <div class="filter h-100 w-100" >
+                    <section class="justify-between flex bb w-100 h-20">
+                        <label for="" class="f5 gray tc content-center ml2 mt1 ">Nhóm SP</label>
+                          <div class="flex w-50 justify-between  ">
+                              <button class="w-40 bn bg-white"(click)="checkAllNhomSP()"><img src="./../../../assets/img/images.png" alt=""></button>
+                              <button class="w-40 bn bg-white "><img src="./../../../assets/img/tải xuống.jpg" alt=""></button>
+                          </div>
+                    </section>
+                      <body class="  dlk-radio flex w-100 justify-between overflow-y-scroll" style="height: 7rem;"  >
+                        <label class="btn btn-success w-100 ml1" *ngFor="let item of types">
+                          <input name="choices[3][]" class="form-control" type="checkbox" value={{item.manhomsp}} (change)="handleMaNhom($event)" [checked]="checkedAllNhomSP">
+                          <i class="fa ">{{item.tennhomsp}}</i>
+                        </label>
+                      </body> 
+                </div>
+            </div>
+            <div class="filter_block">
+                <div class="filter h-100 w-100" >
+                    <section class="justify-between flex bb w-100 h-20">
+                        <label for="" class="f5 gray tc content-center ml1 mt1 w-50">Nhân viên</label>
+                          <div class="flex w-50 justify-between  ">
+                              <button class="w-40 bn bg-white" (click)="checkAllNV()"><img src="./../../../assets/img/images.png" alt=""></button>
+                              <button class="w-40 bn bg-white "><img src="./../../../assets/img/tải xuống.jpg" alt=""></button>
+                          </div>
+                    </section>
+                      <body class="  dlk-radio flex w-100 justify-between overflow-y-scroll" style="height: 7rem;"  >
+                        <label class="btn btn-success w-80 ml1" *ngFor="let item of saler">
+                          <input name="choices[3][]" class="form-control" type="checkbox" value="" [checked]="checkedAllNV">
+                          <i class="fa ">{{item}}</i>
+                        </label>
+                      </body> 
+                </div>
+            </div>
+            <div class="filter_block">
+                <div class="filter h-100 w-100" >
+                    <section class="justify-between flex bb w-100 h-20">
+                        <label for="" class="f5 gray tc content-center ml2 mt1 ">Tiêu đề</label>
+                          <div class="flex w-50 justify-between  ">
+                              <button class="w-40 bn bg-white"><img src="./../../../assets/img/images.png" alt=""></button>
+                              <button class="w-40 bn bg-white "><img src="./../../../assets/img/tải xuống.jpg" alt=""></button>
+                          </div>
+                    </section>
+                      <body class="  dlk-radio flex w-100 justify-between overflow-y-scroll" style="height: 7rem;"  >
+                        <label class="btn btn-success w-100 mr1" *ngFor="let item of titles">
+                          <input name="choices[3][]" class="form-control" type="radio" value={{item}} (change)="handleTitle($event)" [(ngModel)]="title" >
+                          <i class="fa f6">{{item}}</i>
+                        </label>
+                      </body> 
+                </div>
+            </div>
+          </div>
+          <div class="flex w-100 flex-wrap bb b--gray" style="height: 15rem;" >
+            <div class="donut w-30 h-10 tc ">
+              <div [hidden]="!chart0">
+                <canvas id="canvas"></canvas>
+              </div>
+              <strong>CHÊNH LỆCH {{tiSo1}}% SO VỚI KẾ HOẠCH</strong>
+            </div>
+            <div class="w-40 h-100">
+              <div class="f4  h-20 b mt1">Chênh lệch {{realRevenuenow-planRevenue}} SO VỚI KẾ HOẠCH</div>
+              <div class="f5  h-20 bb b--blue bw1 mt1">{{planRevenue}} {{titlee}} KẾ HOẠCH NĂM NAY</div>
+              <div class="f5  h-20 bb b--red inline-flex mt1 bw1 ">{{realRevenuenow}} {{titlee}} NĂM NAY</div>
+              <div class="f5 h-20  bb b--yellow bw1 mt1">{{realRevenueold}} {{titlee}} NĂM TRƯỚC</div>
+              <div class="f5 h-20 b mt1">Chênh lệch {{realRevenuenow-realRevenueold}} SO VỚI NĂM TRƯỚC</div>
+            </div>
+            <div class="donut w-30 h-100 tc">
+              <div [hidden]="!chart1">
+                <canvas id="canvas1"></canvas>
+              </div>
+              <strong>CHÊNH LỆCH {{tiSo2}} % SO VỚI NĂM TRƯỚC</strong>
+            </div>
+          </div>
+          <div class="flex w-100 flex-wrap  bb b--gray " style="height: 15rem;" >
+            <div class="block w-50 h-100 tc">
+              <div class="f4 h-20 b mt2">{{titlee}} THỰC HIỆN {{body.nam}} </div>
+              <div class="flex h-80 w-100">
+                <div class="donut w-50 h-100 tc">
+                  <div [hidden]="!chart2">
+                    <canvas id="canvas2"></canvas>
+                  </div>
+                </div>
+                <div class="w-50 h-100">
+                  <div class="mt3">
+                    <ngx-charts-bar-horizontal 
+                  [view]="view"
+                  [scheme]="colorScheme"
+                  [results]="hori"
+                  [gradient]="gradient"
+                  [xAxis]="showXAxis"
+                  [yAxis]="showYAxis"
+                  [barPadding]="barPadding"
+                  [xScaleMin]=100
+                  [xScaleMax]=200 
+             
+             >
+                </ngx-charts-bar-horizontal>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            <div class="block w-50 h-100 tc">
+              <div class="f4 h-20 b mt2">{{titlee}} THỰC HIỆN {{body2.nam}}</div>
+              <div class="flex h-80 w-100">
+                <div class="donut w-50 h-100 tc">
+                  <div [hidden]="!chart3">
+                    <canvas id="canvas3"></canvas>
+                  </div>
+                </div>
+                <div class="w-50 h-100">
+                  <div class="mt3 ">
+                    <ngx-charts-bar-horizontal 
+                  [view]="view"
+                  [scheme]="colorScheme"
+                  [results]="hori2"
+                  [gradient]="gradient"
+                  [xAxis]="showXAxis"
+                  [yAxis]="showYAxis"
+                  [barPadding]="barPadding"
+                  [xScaleMin]=100
+                  [xScaleMax]=200 
+             >
+                </ngx-charts-bar-horizontal>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex w-100  bb b--gray" style="height:21rem" >
+            <div class="w-60 tc">
+              <div class="f5 h-20 b mt2">SỐ LƯỢNG ĐƠN HÀNG VÀ KHÁCH HÀNG NĂM {{body.nam}}</div>
+              <combo-chart-component
+              [view]="view2"
+              [scheme]="comboBarScheme"
+              [colorSchemeLine]="lineChartScheme"
+              [results]="barChart"
+              [animations]="animations"
+              [lineChart]="lineChartSeries"
+              [gradient]="gradient2"
+              [xAxis]="showXAxis2"
+              [yAxis]="showYAxis2"
+              [legend]="showLegend2"
+              [legendTitle]="legendTitle"
+              [legendPosition]="legendPosition"
+              [showGridLines]="showGridLines"
+              [showXAxisLabel]="showXAxisLabel2"
+              [showYAxisLabel]="showYAxisLabel2"
+              [showRightYAxisLabel]="showYAxisLabel2"
+              [xAxisLabel]="xAxisLabel2"
+              [yAxisLabel]="yAxisLabel2"
+              [yAxisLabelRight]="yAxisLabelRight">
+              </combo-chart-component>
+            </div>
+            <div class="w-40 tc">
+              <div class="f5 h-20 b mt2">TOP 10 SẢN PHẨM VỀ {{titlee}}</div>
+              <div class="mt3 ">
+                <ngx-charts-bar-horizontal 
+              [view]="view3"
+              [scheme]="colorScheme"
+              [results]="top10Product"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [barPadding]="barPadding"
+              [xScaleMin]=100
+              [xScaleMax]=200 
+         >
+            </ngx-charts-bar-horizontal>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-100 flex" style="height:10rem">
+            <div class="w-60 h-100 tc">
+              <div class="f5 h-20 b mt2">{{titlee}} ĐƯỢC THỰC HIỆN THEO NĂM {{body2.nam}} VÀ NĂM {{body.nam}} THEO KÊNH BÁN HÀNG</div>
+              <ngx-charts-bar-horizontal-2d
+                [view]="view3"
+                [scheme]="colorScheme"
+                [results]="topChanel"
+                [gradient]="gradient"
+                [xAxis]="showXAxis"
+                [yAxis]="showYAxis"
+                [legend]="showLegend"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel"
+                [yAxisLabel]="yAxisLabel"
+                (select)="onSelect($event)">
+              </ngx-charts-bar-horizontal-2d>
+            </div>
+            <div class="w-40 tc ">
+              <div class="f5 h-20 b mt2">TOP 10 ĐIỂM BÁN VỀ {{titlee}}</div>
+              <div class="mt3 ">
+                <ngx-charts-bar-horizontal 
+              [view]="view3"
+              [scheme]="colorScheme"
+              [results]="top10Store"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [barPadding]="barPadding"
+              [xScaleMin]=200
+              [xScaleMax]=300 
+         >
+            </ngx-charts-bar-horizontal>
+            </div>
+          </div>
+        </div>
+       
+        <!-- /#page-content-wrapper -->
+    
+      </div>
+</div>

@@ -1,0 +1,105 @@
+/* * màu này sidebar 2f353a
+xanh nhạt 63c2de
+đỏ f86c6b
+vàng ffc107
+xanh đậm 20a8d8 */ 
+ body {
+    overflow-x: hidden;
+  }
+   .out {
+    min-height: 100vh;
+    margin-left: -10rem!important;
+    -webkit-transition: margin .25s ease-out!important;
+    -moz-transition: margin .25s ease-out!important;
+    -o-transition: margin .25s ease-out!important;
+    transition: margin .25s ease-out!important;
+  }
+  #sidebar-wrapper{
+    width: 10rem!important;
+  }
+  #sidebar-wrapper .sidebar-heading {
+    padding: 0.8rem 1.25rem;
+    font-size: 1.2rem;
+  }
+  
+  #sidebar-wrapper .list-group {
+    width: 10rem;
+  }
+  
+  #page-content-wrapper {
+    min-width: 100vw;
+  }
+  #page-content-wrapper .sidebarbutton{
+    width: fit-content;
+    height: fit-content;
+      outline:none;
+      border:none;
+  }
+  #page-content-wrapper .sidebarbutton img{
+      width: 2.5rem;
+      height:1.8rem;
+  } 
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+  }
+  .filter_block{
+      width: 12.5%;
+      height: 100%;
+      border:1px solid gray
+  }
+  .dlk-radio {
+    flex-wrap: wrap;
+  }
+   .filter section label{
+  max-width: 50%!important;
+  }
+  .dlk-radio .btn{
+    height: 1.6rem;
+    line-height: 0.8rem!important;
+    margin-top: 0.2rem;
+    border-radius: 5px!important;
+    border:none!important;
+  }
+  .dlk-radio input[type="radio"],
+.dlk-radio input[type="checkbox"] 
+{
+	margin-left:-99999px;
+  display:none;
+ 
+}
+.dlk-radio input[type="radio"] + .fa ,
+.dlk-radio input[type="checkbox"]+ .fa {
+     opacity:0.5;
+     font-size: 0.9rem;
+
+}
+.dlk-radio input[type="radio"]:checked + .fa,
+.dlk-radio input[type="checkbox"]:checked + .fa{
+    opacity:1;
+    color:white
+}
+.checked{
+  opacity:1;
+  color:white
+}
+.horizontal{
+ 
+}
+.donut{
+
+}
+
+  @media (min-width: 768px) {
+    #sidebar-wrapper {
+      margin-left: 0;
+    }
+  
+    #page-content-wrapper {
+      min-width: 0;
+      width: 100%;
+    }
+  
+    #wrapper.toggled #sidebar-wrapper {
+      margin-left: -15rem;
+    }
+  }
